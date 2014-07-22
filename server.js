@@ -5,6 +5,7 @@ var mime = require('mime');
 var cache = {};
 
 function send404(response) {
+<<<<<<< HEAD
   response.writeHead(404, {'Content-type': 'text/plain'});
   response.write('Error 404: reseouce not found.');
   response.end();
@@ -12,10 +13,10 @@ function send404(response) {
 
 function sendFile(response, filePath, fileContents) {
   response.writeHead(
-	  200,
-		{"content-type": mime.lookup(path.basename(filePath))}
-	  );
-	response.end(fileContents);
+  200,
+  {"content-type": mime.lookup(path.basename(filePath))}
+  );
+  response.end(fileContents);
 }
 
 function serveStatic(response, cache, absPath) {
