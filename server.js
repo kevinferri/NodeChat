@@ -5,7 +5,6 @@ var mime = require('mime');
 var cache = {};
 
 function send404(response) {
-<<<<<<< HEAD
   response.writeHead(404, {'Content-type': 'text/plain'});
   response.write('Error 404: reseouce not found.');
   response.end();
