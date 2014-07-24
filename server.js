@@ -5,8 +5,8 @@ var mime = require('mime');
 var cache = {};
 
 function send404(response) {
-  response.writeHead(404, {'Content-type': 'text/plain'});
-  response.write('Error 404: reseouce not found.');
+  response.writeHead(404, {'Content-type': 'html'});
+  response.write('<h1>Error 404: reseouce not found.</h1>');
   response.end();
 }
 
@@ -18,6 +18,7 @@ function sendFile(response, filePath, fileContents) {
 function serveStatic(response, cache, absPath) {
   if (cache[absPath]) {
     sendFile(response, absPath, cache[absPath]);
+    console.log("SERVING: " + absPath)
   } else {
     fs.exists(absPath, function(exists) {
       if (exists) {
@@ -27,11 +28,12 @@ function serveStatic(response, cache, absPath) {
           } else {
             cache[absPath] = data;
             sendFile(response, absPath, data);
+            console.log("SERVING: " + absPath)
           }
         });
       } else {
         send404(response);
-        console.log(absPath + " not found.");
+        console.log("NOT FOUND: " + absPath);
       }
     });
   }
